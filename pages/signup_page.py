@@ -8,6 +8,7 @@ class SignUpPage:
 
     def open(self):
         self.page.goto(LOGIN_URL)
+        
 
     def first_signup(self, name: str, email: str):
         self.page.locator('[data-qa="signup-name"]').fill(name)

@@ -1,0 +1,43 @@
+name: Playwright Tests
+
+on:
+  push:
+    branches: [ main ]
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout code
+      uses: actions/checkout@v3
+
+    - name: Set up Python
+      uses: actions/setup-python@v4
+      with:
+        python-version: '3.11'
+
+    - name: Install dependencies
+      run: |
+        pip install pytest-playwright pytest-html python-dotenv
+        playwright install --with-deps
+
+    - name: Create .env file
+      run: |
+        echo "USERNAME=${{ secrets.USERNAME }}" >> .env
+        echo "PASSWORD=${{ secrets.PASSWORD }}" >> .env
+        echo "BASE_URL=https://www.automationexercise.com" >> .env
+        echo "LOGIN_URL=https://www.automationexercise.com/login" >> .env
+        echo "PRODUCTS_URL=https://www.automationexercise.com/products" >> .env
+        echo "CART_URL=https://www.automationexercise.com/view_cart" >> .env
+        echo "CHECKOUT_URL=https://www.automationexercise.com/checkout" >> .env
+
+    - name: Run tests
+      run: pytest tests/ -v
+
+    - name: Upload report
+      uses: actions/upload-artifact@v3
+      if: always()
+      with:
+        name: test-report
+        path: report.html
