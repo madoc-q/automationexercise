@@ -40,6 +40,7 @@ pytest tests/ -v --headed
 
 ## Test Coverage
 
-- ✅ First signup step — name and email
-- ✅ Full registration — all fields filled, account created
-- ✅ Missing fields — parametrized negative cases
+- First signup step — name and email
+- Full registration — all fields filled, account created
+- Missing fields — parametrized negative cases
+- Checkout Process
