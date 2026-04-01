@@ -25,3 +25,16 @@ def test_login_missingfields(firstlogged_in_page,email,password):
     missingfields.login(email,password)
     
     
+
+def test_login_on_mobile(mobile_page):
+   
+    login = LoginPage(mobile_page)
+    
+    # navigate to the login page
+    login.open()
+    
+    # credentials and login
+    login.login("quaye.madoc@gmail.com", "Godisgood")
+    
+    # assert we landed on the right page after login
+    expect(mobile_page).to_have_url(re.compile("automationexercise.com"))
