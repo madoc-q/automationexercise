@@ -7,7 +7,8 @@ from pages.cart_page import CartPage
 from pages.products_page import ProductPage
 from pages.checkout_page import CheckoutPage
 from config import USERNAME, PASSWORD
-import os 
+import os
+import uuid 
 
 
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)
@@ -31,7 +32,8 @@ def first_page(page):
 @pytest.fixture
 def second_signup_page(first_page):
     secondsignup = SignUpPage(first_page)
-    secondsignup.first_signup("Madoc Quaye", "quaye.madoc@gmail.com")
+    unique_email = f"test_{uuid.uuid4()}@example.com"
+    secondsignup.first_signup("Madoc Quaye", unique_email)
     return first_page
 
 
