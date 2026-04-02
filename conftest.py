@@ -79,7 +79,7 @@ def checkout_page(cart_page):
 @pytest.fixture
 def mobile_page(playwright):
     iphone = playwright.devices["iPhone 13"]
-    browser = playwright.chromium.launch(headless=False)
+    browser = playwright.chromium.launch()
     context = browser.new_context(**iphone)
     page = context.new_page()
     yield page

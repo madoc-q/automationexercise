@@ -5,10 +5,10 @@ import re
 from pages.login_page import LoginPage
 from config import BASE_URL
 
-def test_successfullogin(firstlogged_in_page):
-    logged= LoginPage(firstlogged_in_page)
+def test_successfullogin(logged_in_page):
+    logged= LoginPage(logged_in_page)
     logged.login("quaye.madoc@gmail.com","Godisgood")
-    expect(firstlogged_in_page).to_have_url(re.compile("automationexercise.com"))
+    expect(logged_in_page).to_have_url(re.compile("automationexercise.com"))
     
     
 @pytest.mark.parametrize(
@@ -20,8 +20,8 @@ def test_successfullogin(firstlogged_in_page):
 ]
 )
 
-def test_login_missingfields(firstlogged_in_page,email,password):
-    missingfields= LoginPage(firstlogged_in_page)
+def test_login_missingfields(logged_in_page,email,password):
+    missingfields= LoginPage(logged_in_page)
     missingfields.login(email,password)
     
     
