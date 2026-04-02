@@ -14,7 +14,7 @@ class SignUpPage:
         self.page.locator('[data-qa="signup-name"]').fill(name)
         self.page.locator('[data-qa="signup-email"]').fill(email)
         self.page.locator('[data-qa="signup-button"]').click()
-        self.page.wait_for_load_state("networkidle")  # Add this
+        self.page.wait_for_load_state("load")
  
     def second_signup(
         self,

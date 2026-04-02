@@ -8,11 +8,11 @@ class LoginPage():
     def open(self):
         self.page.goto(LOGIN_URL)
         
+        
     def login(self,email: str="",password: str=""):
         self.page.locator('[data-qa="login-email"]').fill(email)
         self.page.locator('[data-qa="login-password"]').fill(password)
         self.page.locator('[data-qa="login-button"]').click()
-        
-    
+        self.page.wait_for_load_state("load")
         
         

@@ -25,6 +25,15 @@ def pytest_runtest_makereport(item, call):
 def first_page(page):
     firstsignup = SignUpPage(page)
     firstsignup.open()
+    page.wait_for_selector('[data-qa="signup-name"]', state="visible", timeout=10000)
+    return page
+
+
+@pytest.fixture
+def firstlogged_in_page(page):
+    floggedin = LoginPage(page)
+    floggedin.open()
+    page.wait_for_selector('[data-qa="login-email"]', state="visible", timeout=10000)
     return page
 
 
@@ -33,6 +42,7 @@ def second_signup_page(first_page):
     secondsignup = SignUpPage(first_page)
     unique_email = f"test_{uuid.uuid4()}@example.com"
     secondsignup.first_signup("Madoc Quaye", unique_email)
+    first_page.wait_for_selector('[data-qa="name"]', state="visible", timeout=10000)
     return first_page
 
 
@@ -40,6 +50,7 @@ def second_signup_page(first_page):
 def logged_in_page(page):
     loggedin = LoginPage(page)
     loggedin.open()
+    page.wait_for_selector('[data-qa="login-email"]', state="visible", timeout=10000)
     loggedin.login(USERNAME, PASSWORD)
     return page
 
